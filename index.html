@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  		<body>
+
+    	<link rel='stylesheet' href='bootstrap.min.css'></style>
+    	<link rel='stylesheet' href='font-awesome.min.css'></style>
+
+  		<div class="container">
+    	<div class = "centered">
+           <header class="text-center text-white">
+            	<title> sentiment analysis app </title>
+
+            <h1 class = 'header'>
+              Sentiment Analysis App
+            </h1>
+
+            <p class = 'desc'>
+              Type a phrase as if you are writing a review, or simply pull some review from a website and paste it here!
+              Note that this sentiment model works best for comments/reviews leaning towards either positive or negative ends
+              so if you type a neutral line like "ok, not bad", the model is NOT going to tell you that. In a future web app,
+              I'll make the model so that it can identify 5 different categories of comments, ranging from "very nagative" to "very positive",
+              and of course it will include the "neutral" option as well. Stay tuned for the software update ~
+            </p>
+
+            <form method="POST" onSubmit = 'return validate();' class='form'>
+                <input name="text">
+                <input type="submit" onclick = 'this.form.submit();'>
+            </form>
+            <br>
+            <br>
+
+            <p id='demo'>{{ variable }} </p> 
+
+            
+            </div>
+            </div>
+            </head>
+            </body>
+
+    <style>
+
+    .container {
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    .header {
+      color: black
+    }
+
+    p { color: rgb(42, 120, 209); font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-justify: inter-word; }
+
+    h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 36px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
+
+    #demo {
+      color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 22px; line-height: 24px; margin: 0 0 24px; text-justify: inter-word;
+    }
+
+    input[type=submit] {
+      background-color: #401aa8; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 0.95em;
+    }
+
+    input[type=submit]:hover {
+      background-color: #3f0eb0;
+    }
+
+    </style>
+    
+    </html>
