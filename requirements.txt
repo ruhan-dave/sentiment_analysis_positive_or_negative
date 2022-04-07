@@ -4,4 +4,3 @@ Flask
 sklearn
 numpy
 emoji
-
