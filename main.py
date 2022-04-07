@@ -53,7 +53,7 @@ def my_form():
 def my_form_post():
     text = request.form['text']
     text = list(text)
-    with open("logistic_regression.pkl", 'rb') as f:
+    with open("final.pkl", 'rb') as f:
         model = pickle.load(f)
     answer = int(model.predict(text)[0])
     neg_face = emoji.emojize(":grimacing_face:")
