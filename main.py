@@ -1,10 +1,8 @@
 import pandas as pd
-import nltk
 from flask import request
 from flask import jsonify
 from flask import Flask, render_template
 import pickle
-import scikit-learn
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -61,7 +59,7 @@ def my_form_post():
     if answer == 0:
         label = f"This review is negative {neg_face}"
     if answer == 1:
-        label = f"This review is postivie! {pos_face}"
+        label = f"This review is postivie {pos_face}"
 
     return(render_template('index.html', variable=label))
 
