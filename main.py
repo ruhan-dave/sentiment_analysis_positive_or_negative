@@ -4,7 +4,7 @@ from flask import request
 from flask import jsonify
 from flask import Flask, render_template
 import pickle
-import sklearn
+import scikit-learn
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
