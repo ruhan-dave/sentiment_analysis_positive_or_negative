@@ -56,8 +56,8 @@ def my_form_post():
     with open("final.pkl", 'rb') as f:
         model = pickle.load(f)
     answer = int(model.predict(text)[0])
-    neg_face = emoji.emojize(":grimacing_face:")
-    pos_face = emoji.emojize(":slightly_smiling_face:")
+    neg_face = emoji.emojize(':grimacing_face:')
+    pos_face = emoji.emojize(':slightly_smiling_face:')
     if answer == 0:
         label = f"This review is negative {neg_face}"
     if answer == 1:
