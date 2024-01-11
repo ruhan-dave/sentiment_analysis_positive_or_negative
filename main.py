@@ -67,4 +67,4 @@ def my_form_post():
 
 
 if __name__ == "__main__":
-    app.run(port='8088', threaded=False, debug=True)
+    app.run(port='8088', threaded=False)
