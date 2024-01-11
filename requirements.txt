@@ -1,6 +1,6 @@
 pandas
 nltk
 Flask
-sklearn
+scikit-learn
 numpy
 emoji
