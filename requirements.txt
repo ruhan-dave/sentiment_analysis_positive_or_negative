@@ -1,11 +1,9 @@
 pandas
 nltk
 Flask
-scikit-learn
+sklearn
 numpy
-emoji
-gunicorn
-
-
-
-
+streamlit
+s3fs
+boto3
+st-files-connection
