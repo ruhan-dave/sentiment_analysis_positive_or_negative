@@ -1,8 +1,8 @@
 import pandas as pd
-from flask import request
-from flask import jsonify
-from flask import Flask, render_template
+import numpy as np
+import nltk
 import pickle
+import sklearn
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,15 +12,20 @@ from nltk.stem import *
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import re
-import string
-import pandas as pd
-import numpy as np
-import emoji
+import streamlit as st
+import boto3
+from io import BytesIO
+from st_files_connection import FilesConnection
 
 
-app = Flask(__name__)
+conn = st.connection('s3', type=FilesConnection)
+s3 = boto3.resource('s3')
 
-@app.route('/')
+with BytesIO() as data:
+    s3.Bucket("productreviewsentiment").download_fileobj("sentiment.pkl", data)
+    data.seek(0)    # move back to the beginning after writing
+    model = pickle.load(data)
+
 def process_comment(comment):
     # remove stock market tickers like $GE
     comment = re.sub(r'\$\w*', '', comment)
@@ -43,26 +48,30 @@ def tokenizer_porter(text):
 def stop():
     stop = stopwords.words('english')
     return stop
-    
-def my_form():
-    return render_template('index.html')
 
-@app.route('/', methods=['POST'])
-def my_form_post():
-    text = request.form['text']
-    text = list(text)
-    with open("final.pkl", 'rb') as f:
-        model = pickle.load(f)
+def app_prediction(model, text):
     answer = int(model.predict(text)[0])
-    neg_face = emoji.emojize(':grimacing_face:')
-    pos_face = emoji.emojize(':slightly_smiling_face:')
     if answer == 0:
-        label = f"This review is negative {neg_face}"
+        label = f"This review is negative :anguished:"
     if answer == 1:
-        label = f"This review is postivie {pos_face}"
+        label = f"This review is positive :smiley:"
+    return label
 
-    return(render_template('index.html', variable=label))
+# App Interface
+st.title("Product Review Positivity Predictor (positive or negative)")
 
+# Input
+text = st.text_input('Enter full review', 'Copy and paste the review here')
+text = list(text)
 
-if __name__ == "__main__":
-    app.run(port='8088', threaded=False)
+# load model
+with open("final.pkl", 'rb') as f:
+    model = pickle.load(f)
+
+# prediction
+    # design user interface
+if st.button("Find Out"):
+    x = process_comment(text)
+    prediction = app_prediction(model, x)
+    st.subheader("Prediction based on your inputs:")
+    st.write(prediction)
